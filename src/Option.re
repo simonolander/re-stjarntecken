@@ -15,6 +15,12 @@ let isPresent = opt =>
   | None => false
   };
 
+let withDefault = (default, opt) =>
+  switch (opt) {
+  | Some(value) => value
+  | None => default
+  };
+
 let contains = (value, opt) => opt |> filter((==)(value)) |> isPresent;
 
 let map = (func, opt) =>
