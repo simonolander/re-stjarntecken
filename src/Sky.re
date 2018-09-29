@@ -58,13 +58,17 @@ let normalizeStarPositions = (stars: list(Model.star)) =>
         );
       } else if (width > height) {
         let marginX = viewBoxWidth *. defaultMarginMultiplier;
-        let marginY = (viewBoxHeight -. (viewBoxWidth -. marginX *. 2.) *. height /. width) /. 2.;
+        let marginY =
+          (viewBoxHeight -. (viewBoxWidth -. marginX *. 2.) *. height /. width)
+          /. 2.;
         (marginX, marginY);
       } else {
         let marginY = viewBoxHeight *. defaultMarginMultiplier;
-        let marginX = (viewBoxWidth -. (viewBoxHeight -. marginY *. 2.) *. width /. height) /. 2.;
+        let marginX =
+          (viewBoxWidth -. (viewBoxHeight -. marginY *. 2.) *. width /. height)
+          /. 2.;
         (marginX, marginY);
-      }
+      };
     let normalizeX = x =>
       if (width == 0.) {
         viewBoxMinX +. viewBoxWidth /. 2.;
