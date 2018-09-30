@@ -297,6 +297,111 @@ let theApprentice = () => {
   sky;
 };
 
+let theAtronach = () => {
+  let stars: list(Model.star) = [
+    {
+      id: 1,
+      size: 1.,
+      position: {
+        x: 222.,
+        y: 295.,
+      },
+    },
+    {
+      id: 2,
+      size: 1.,
+      position: {
+        x: 213.,
+        y: 229.,
+      },
+    },
+    {
+      id: 3,
+      size: 1.,
+      position: {
+        x: 186.,
+        y: 196.,
+      },
+    },
+    {
+      id: 4,
+      size: 1.,
+      position: {
+        x: 185.,
+        y: 120.,
+      },
+    },
+    {
+      id: 5,
+      size: 1.,
+      position: {
+        x: 208.,
+        y: 79.,
+      },
+    },
+    {
+      id: 6,
+      size: 1.,
+      position: {
+        x: 279.,
+        y: 85.,
+      },
+    },
+    {
+      id: 7,
+      size: 1.,
+      position: {
+        x: 264.,
+        y: 161.,
+      },
+    },
+    {
+      id: 8,
+      size: 1.,
+      position: {
+        x: 283.,
+        y: 294.,
+      },
+    },
+    {
+      id: 9,
+      size: 1.,
+      position: {
+        x: 336.,
+        y: 137.,
+      },
+    },
+    {
+      id: 10,
+      size: 1.,
+      position: {
+        x: 304.,
+        y: 236.,
+      },
+    },
+  ];
+  let constellations: list(Model.constellation) = [
+    {
+      name: "The Atronach",
+      edges: [
+        (1, 2),
+        (2, 3),
+        (2, 8),
+        (3, 4),
+        (4, 5),
+        (5, 6),
+        (6, 7),
+        (6, 9),
+        (7, 8),
+        (9, 10),
+      ],
+      found: false,
+    },
+  ];
+  let sky: Model.sky = {stars, constellations};
+  sky;
+};
+
 let template = () => {
   let stars: list(Model.star) = [
     {
