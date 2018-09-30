@@ -296,3 +296,38 @@ let theApprentice = () => {
   let sky: Model.sky = {stars, constellations};
   sky;
 };
+
+let template = () => {
+  let stars: list(Model.star) = [
+    {
+      id: 1,
+      size: 1.,
+      position: {
+        x: 0.,
+        y: 0.,
+      },
+    },
+  ];
+  let constellations: list(Model.constellation) = [
+    {
+      name: "Template",
+      edges: [
+        (1, 2),
+        (2, 3),
+        (3, 4),
+        (3, 5),
+        (3, 6),
+        (3, 7),
+        (3, 10),
+        (5, 6),
+        (7, 8),
+        (8, 9),
+        (9, 10),
+        (9, 11),
+      ],
+      found: false,
+    },
+  ];
+  let sky: Model.sky = {stars, constellations};
+  sky;
+};
