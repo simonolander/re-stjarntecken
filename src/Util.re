@@ -34,7 +34,7 @@ let theLover = () => {
     },
     {
       id: 5,
-      size: 0.4,
+      size: 0.7,
       position: {
         x: 226.,
         y: 82.,
@@ -50,7 +50,7 @@ let theLover = () => {
     },
     {
       id: 7,
-      size: 0.4,
+      size: 0.7,
       position: {
         x: 323.,
         y: 139.,
@@ -66,7 +66,7 @@ let theLover = () => {
     },
     {
       id: 9,
-      size: 0.4,
+      size: 0.7,
       position: {
         x: 312.,
         y: 218.,
@@ -194,7 +194,7 @@ let theApprentice = () => {
     },
     {
       id: 2,
-      size: 0.4,
+      size: 0.7,
       position: {
         x: 208.,
         y: 175.,
@@ -234,7 +234,7 @@ let theApprentice = () => {
     },
     {
       id: 7,
-      size: 0.4,
+      size: 0.7,
       position: {
         x: 265.,
         y: 219.,
@@ -258,7 +258,7 @@ let theApprentice = () => {
     },
     {
       id: 10,
-      size: 0.4,
+      size: 0.7,
       position: {
         x: 260.,
         y: 175.,
