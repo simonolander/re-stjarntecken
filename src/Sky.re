@@ -49,7 +49,7 @@ let normalizeStarPositions = (stars: list(Model.star)) =>
     let maxY = List.fold_left(max, head.position.y, ys);
     let width = maxX -. minX;
     let height = maxY -. minY;
-    let defaultMarginMultiplier = 0.1;
+    let defaultMarginMultiplier = 0.05;
     let (marginX, marginY) =
       if (width == 0. || height == 0.) {
         (
@@ -152,6 +152,7 @@ let make = (~sky: Model.sky, _children) => {
                |> Option.map(Functions.always(5.))
                |> Option.withDefault(4.)
              }
+             focused=(Option.contains(star.id, self.state.focusedStarId))
              onEnter={() => self.send(EnterStar(star.id))}
              onLeave={() => self.send(LeaveStar(star.id))}
            />

@@ -7,6 +7,7 @@ type starId = int;
 
 type star = {
   id: starId,
+  size: float,
   position,
 };
 
