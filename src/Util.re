@@ -402,6 +402,191 @@ let theAtronach = () => {
   sky;
 };
 
+let theLord = () => {
+  let stars: list(Model.star) = [
+    {
+      id: 1,
+      size: 1.,
+      position: {
+        x: 299.,
+        y: 79.,
+      },
+    },
+    {
+      id: 2,
+      size: 0.7,
+      position: {
+        x: 320.,
+        y: 80.,
+      },
+    },
+    {
+      id: 3,
+      size: 1.,
+      position: {
+        x: 321.,
+        y: 116.,
+      },
+    },
+    {
+      id: 4,
+      size: 1.,
+      position: {
+        x: 317.,
+        y: 165.,
+      },
+    },
+    {
+      id: 5,
+      size: 1.,
+      position: {
+        x: 250.,
+        y: 228.,
+      },
+    },
+    {
+      id: 6,
+      size: 0.7,
+      position: {
+        x: 309.,
+        y: 232.,
+      },
+    },
+    {
+      id: 7,
+      size: 0.7,
+      position: {
+        x: 304.,
+        y: 284.,
+      },
+    },
+    {
+      id: 8,
+      size: 1.,
+      position: {
+        x: 292.,
+        y: 317.,
+      },
+    },
+    {
+      id: 9,
+      size: 1.,
+      position: {
+        x: 260.,
+        y: 331.,
+      },
+    },
+    {
+      id: 10,
+      size: 0.7,
+      position: {
+        x: 244.,
+        y: 318.,
+      },
+    },
+    {
+      id: 11,
+      size: 0.7,
+      position: {
+        x: 255.,
+        y: 298.,
+      },
+    },
+    {
+      id: 12,
+      size: 0.7,
+      position: {
+        x: 291.,
+        y: 126.,
+      },
+    },
+    {
+      id: 13,
+      size: 0.7,
+      position: {
+        x: 272.,
+        y: 126.,
+      },
+    },
+    {
+      id: 14,
+      size: 0.7,
+      position: {
+        x: 250.,
+        y: 129.,
+      },
+    },
+    {
+      id: 15,
+      size: 0.7,
+      position: {
+        x: 375.,
+        y: 149.,
+      },
+    },
+    {
+      id: 16,
+      size: 1.,
+      position: {
+        x: 332.,
+        y: 236.,
+      },
+    },
+    {
+      id: 17,
+      size: 1.,
+      position: {
+        x: 328.,
+        y: 327.,
+      },
+    },
+    {
+      id: 18,
+      size: 0.7,
+      position: {
+        x: 356.,
+        y: 318.,
+      },
+    },
+    {
+      id: 19,
+      size: 0.7,
+      position: {
+        x: 359.,
+        y: 281.,
+      },
+    },
+  ];
+  let constellations: list(Model.constellation) = [
+    {
+      name: "The Lord",
+      edges: [
+        (1, 2),
+        (2, 3),
+        (3, 4),
+        (3, 12),
+        (3, 15),
+        (4, 5),
+        (5, 6),
+        (6, 7),
+        (6, 16),
+        (7, 8),
+        (8, 9),
+        (8, 17),
+        (9, 10),
+        (10, 11),
+        (12, 13),
+        (13, 14),
+        (17, 18),
+        (18, 19),
+      ],
+      found: false,
+    },
+  ];
+  let sky: Model.sky = {stars, constellations};
+  sky;
+};
+
 let template = () => {
   let stars: list(Model.star) = [
     {

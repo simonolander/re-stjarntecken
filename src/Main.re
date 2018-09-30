@@ -4,7 +4,7 @@ let make = _children => {
   ...component,
   render: _self =>
     <div className="columns full-height">
-      <div className="column"> <Sky sky={Util.theAtronach()} /> </div>
+      <div className="column"> <Sky sky={Util.theLord()} /> </div>
       <Sidebar />
     </div>,
 };
