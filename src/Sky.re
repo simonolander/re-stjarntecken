@@ -105,7 +105,7 @@ let make = (~sky: Model.sky, _children) => {
     let constellations = sky.constellations;
     let enteredStarId = None;
     let focusedStarId = None;
-    let currentEdges = [];
+    let currentEdges = List.hd(sky.constellations).edges;
     {stars, constellations, enteredStarId, focusedStarId, currentEdges};
   },
   reducer: (action, state) =>
@@ -151,8 +151,9 @@ let make = (~sky: Model.sky, _children) => {
                Option.filter((==)(star.id), self.state.focusedStarId)
                |> Option.map(Functions.always(5.))
                |> Option.withDefault(4.)
+               |> (*.)(star.size)
              }
-             focused=(Option.contains(star.id, self.state.focusedStarId))
+             focused={Option.contains(star.id, self.state.focusedStarId)}
              onEnter={() => self.send(EnterStar(star.id))}
              onLeave={() => self.send(LeaveStar(star.id))}
            />

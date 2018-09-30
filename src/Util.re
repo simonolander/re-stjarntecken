@@ -181,3 +181,118 @@ let karlavagnen = () => {
   let sky: Model.sky = {stars, constellations};
   sky;
 };
+
+let theApprentice = () => {
+  let stars: list(Model.star) = [
+    {
+      id: 1,
+      size: 1.,
+      position: {
+        x: 191.,
+        y: 49.,
+      },
+    },
+    {
+      id: 2,
+      size: 0.4,
+      position: {
+        x: 208.,
+        y: 175.,
+      },
+    },
+    {
+      id: 3,
+      size: 1.,
+      position: {
+        x: 214.,
+        y: 225.,
+      },
+    },
+    {
+      id: 4,
+      size: 1.,
+      position: {
+        x: 247.,
+        y: 333.,
+      },
+    },
+    {
+      id: 5,
+      size: 1.,
+      position: {
+        x: 137.,
+        y: 205.,
+      },
+    },
+    {
+      id: 6,
+      size: 1.,
+      position: {
+        x: 157.,
+        y: 251.,
+      },
+    },
+    {
+      id: 7,
+      size: 0.4,
+      position: {
+        x: 265.,
+        y: 219.,
+      },
+    },
+    {
+      id: 8,
+      size: 1.,
+      position: {
+        x: 343.,
+        y: 201.,
+      },
+    },
+    {
+      id: 9,
+      size: 1.,
+      position: {
+        x: 305.,
+        y: 130.,
+      },
+    },
+    {
+      id: 10,
+      size: 0.4,
+      position: {
+        x: 260.,
+        y: 175.,
+      },
+    },
+    {
+      id: 11,
+      size: 1.,
+      position: {
+        x: 330.,
+        y: 69.,
+      },
+    },
+  ];
+  let constellations: list(Model.constellation) = [
+    {
+      name: "The Apprentice",
+      edges: [
+        (1, 2),
+        (2, 3),
+        (3, 4),
+        (3, 5),
+        (3, 6),
+        (3, 7),
+        (3, 10),
+        (5, 6),
+        (7, 8),
+        (8, 9),
+        (9, 10),
+        (9, 11),
+      ],
+      found: false,
+    },
+  ];
+  let sky: Model.sky = {stars, constellations};
+  sky;
+};
