@@ -63,3 +63,17 @@ let rec flattenList = list =>
   | [None, ...tail] => flattenList(tail)
   | [] => []
   };
+
+let prepend = (list, opt) =>
+  switch (opt) {
+  | Some(value) => [value, ...list]
+  | None => list
+  };
+
+let choose = (func, opt1, opt2) =>
+  switch (opt1, opt2) {
+  | (Some(v1), Some(v2)) => Some(func(v1, v2))
+  | (Some(v), None) => Some(v)
+  | (None, Some(v)) => Some(v)
+  | (None, None) => None
+  };

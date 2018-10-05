@@ -621,3 +621,136 @@ let template = () => {
   let sky: Model.sky = {stars, constellations};
   sky;
 };
+
+let rec spanningTree =
+        (
+          all: list(Model.star),
+          inside: list(Model.star),
+          outside: list(Model.star),
+          edges: list(Model.constellationEdge),
+        ) =>
+  switch (outside) {
+  | [] => edges
+  | [head, ...tail] =>
+    let edge =
+      Lists.randomElement(inside)
+      |> Option.map((star: Model.star) => star.id)
+      |> Option.flatMap(Model.createEdge(head.id));
+    switch (edge) {
+    | None => edges
+    | Some(e) => spanningTree(all, [head, ...inside], tail, [e, ...edges])
+    };
+  };
+
+let minimumSpanningTree = (starList: list(Model.star)) => {
+  let stars = Array.of_list(starList);
+  let rec minimumSpanningTreeRec =
+          (
+            inside: Belt.Set.Int.t,
+            outside: Belt.Set.Int.t,
+            edges: list(Model.constellationEdge),
+            closenesses: array((int, float)),
+          ) => {
+    Js.log(edges);
+    let getDistance = (i1, i2) =>
+      Option.map2(
+        Model.distance,
+        Belt.Array.get(stars, i1) |> Option.map(Model.getStarPosition),
+        Belt.Array.get(stars, i2) |> Option.map(Model.getStarPosition),
+      );
+    let keepClosest = (opt1, i2) =>
+      switch (opt1) {
+      | Some(i1) =>
+        switch (
+          Belt.Array.get(closenesses, i1),
+          Belt.Array.get(closenesses, i2),
+        ) {
+        | (Some((_, c1)), Some((_, c2))) =>
+          if (c1 < c2) {
+            Some(i1);
+          } else {
+            Some(i2);
+          }
+        | (Some(_), None) => Some(i1)
+        | (None, Some(_)) => Some(i2)
+        | (None, None) => None
+        }
+      | None => Some(i2)
+      };
+    let optClosest = Belt.Set.Int.reduce(outside, None, keepClosest);
+    switch (optClosest) {
+    | Some(i1) =>
+      switch (Belt.Array.get(closenesses, i1)) {
+      | Some((i2, _distance)) =>
+        let newInside = Belt.Set.Int.add(inside, i1);
+        let newOutside = Belt.Set.Int.remove(outside, i1);
+        let starId1 =
+          Belt.Array.get(stars, i1) |> Option.map(Model.getStarId);
+        let starId2 =
+          Belt.Array.get(stars, i2) |> Option.map(Model.getStarId);
+        let edge = Option.flatMap2(Model.createEdge, starId1, starId2);
+        let newEdges = Option.prepend(edges, edge);
+        let newClosenesses =
+          closenesses
+          |> Array.mapi((index, (i, d)) =>
+               if (index == i1) {
+                 (i, 0.);
+               } else {
+                 switch (getDistance(index, i1)) {
+                 | Some(distance) =>
+                   if (distance < d) {
+                     (i1, distance);
+                   } else {
+                     (i, d);
+                   }
+                 | None => (i, d)
+                 };
+               }
+             );
+        minimumSpanningTreeRec(
+          newInside,
+          newOutside,
+          newEdges,
+          newClosenesses,
+        );
+      | None => edges
+      }
+    | None => edges
+    };
+  };
+  switch (starList) {
+  | [] => []
+  | [head, ..._] =>
+    let inside = Belt.Set.Int.empty->Belt.Set.Int.add(0);
+    let outside =
+      Belt.Set.Int.fromArray(Array.mapi((index, _) => index, stars))
+      ->Belt.Set.Int.remove(0);
+    let edges = [];
+    let closenesses =
+      stars
+      |> Array.map(star =>
+           if (star == head) {
+             (0, 0.);
+           } else {
+             (0, Model.distance(head.position, star.position));
+           }
+         );
+    minimumSpanningTreeRec(inside, outside, edges, closenesses);
+  };
+};
+
+let random = () => {
+  Random.self_init();
+  let width = 50. +. Random.float(50.);
+  let height = 50. +. Random.float(50.);
+  let randomPosition = () =>
+    Model.{x: Random.float(width), y: Random.float(height)};
+  let stars =
+    Lists.init(12, id => Model.{id, position: randomPosition(), size: 1.});
+  let edges = minimumSpanningTree(stars);
+  let constellations: list(Model.constellation) = [
+    {name: "Random", edges, found: false},
+  ];
+  let sky: Model.sky = {stars, constellations};
+  sky;
+};

@@ -18,10 +18,8 @@ let make = _children => {
     | Toggle => ReasonReact.Update({...state, show: !state.show})
     },
   render: self => {
-    let message =
+    let _message =
       "You've clicked this " ++ string_of_int(self.state.count) ++ " times(s)";
-    <div className="column is-one-fifth">
-      {ReasonReact.string("sidebar")}
-    </div>;
+    <div className="column is-one-fifth"> <td disabled=true /> </div>;
   },
 };

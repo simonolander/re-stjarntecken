@@ -3,6 +3,12 @@ type position = {
   y: float,
 };
 
+let distance = (p1, p2) => {
+  let dx = p2.x -. p1.x;
+  let dy = p2.y -. p1.y;
+  sqrt(dx *. dx +. dy *. dy);
+};
+
 type starId = int;
 
 type star = {
@@ -10,6 +16,10 @@ type star = {
   size: float,
   position,
 };
+
+let getStarId = star => star.id;
+
+let getStarPosition = star => star.position;
 
 type constellationEdge = (starId, starId);
 
