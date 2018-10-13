@@ -47,5 +47,10 @@ let rec range = (fromInclusive, toInclusive) =>
 
 let init = (size, func) => range(0, size - 1) |> List.map(func);
 
-/* Incorrectly displayed as ('a, 'a) => ('a, 'a), should be ('a, 'b) => ('a, 'b) */
-let f = (a, b) => (a, b);
+let flatMap = (func, list) => List.map(func, list) |> List.flatten;
+
+let rec distinct = list =>
+  switch (list) {
+  | [] => []
+  | [head, ...tail] => [head, ...distinct(remove(head, tail))]
+  };

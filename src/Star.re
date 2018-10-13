@@ -8,9 +8,11 @@ let make =
     (
       ~position: Model.position,
       ~radius: float,
-      ~focused: bool,
-      ~onEnter,
-      ~onLeave,
+      ~focused: bool=false,
+      ~active: bool=false,
+      ~entered: bool=false,
+      ~onEnter=() => (),
+      ~onLeave=() => (),
       _children,
     ) => {
   ...component,
@@ -19,9 +21,14 @@ let make =
     let cy = Strings.ofFloat(position.y);
     let r = Strings.ofFloat(radius);
     let innerRadius = Strings.ofFloat(radius /. 3.);
-    let className = focused ? "star-focused" : "star-hover";
+    let outerFill =
+      switch (active, focused, entered) {
+      | (true, true, _) => "#7f85fd80"
+      | (true, false, true) => "#4e529980"
+      | _ => "transparent"
+      };
     <g onMouseEnter={_ => onEnter()} onMouseLeave={_ => onLeave()}>
-      <circle className cx cy r />
+      <circle fill=outerFill cx cy r />
       <circle cx cy r=innerRadius fill="white" />
     </g>;
   },

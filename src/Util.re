@@ -651,7 +651,6 @@ let minimumSpanningTree = (starList: list(Model.star)) => {
             edges: list(Model.constellationEdge),
             closenesses: array((int, float)),
           ) => {
-    Js.log(edges);
     let getDistance = (i1, i2) =>
       Option.map2(
         Model.distance,
@@ -679,27 +678,27 @@ let minimumSpanningTree = (starList: list(Model.star)) => {
       };
     let optClosest = Belt.Set.Int.reduce(outside, None, keepClosest);
     switch (optClosest) {
-    | Some(i1) =>
-      switch (Belt.Array.get(closenesses, i1)) {
-      | Some((i2, _distance)) =>
-        let newInside = Belt.Set.Int.add(inside, i1);
-        let newOutside = Belt.Set.Int.remove(outside, i1);
+    | Some(closestIndex) =>
+      switch (Belt.Array.get(closenesses, closestIndex)) {
+      | Some((parentIndex, _distance)) =>
+        let newInside = Belt.Set.Int.add(inside, closestIndex);
+        let newOutside = Belt.Set.Int.remove(outside, closestIndex);
         let starId1 =
-          Belt.Array.get(stars, i1) |> Option.map(Model.getStarId);
+          Belt.Array.get(stars, closestIndex) |> Option.map(Model.getStarId);
         let starId2 =
-          Belt.Array.get(stars, i2) |> Option.map(Model.getStarId);
+          Belt.Array.get(stars, parentIndex) |> Option.map(Model.getStarId);
         let edge = Option.flatMap2(Model.createEdge, starId1, starId2);
         let newEdges = Option.prepend(edges, edge);
         let newClosenesses =
           closenesses
           |> Array.mapi((index, (i, d)) =>
-               if (index == i1) {
+               if (index == closestIndex) {
                  (i, 0.);
                } else {
-                 switch (getDistance(index, i1)) {
+                 switch (getDistance(index, closestIndex)) {
                  | Some(distance) =>
                    if (distance < d) {
-                     (i1, distance);
+                     (closestIndex, distance);
                    } else {
                      (i, d);
                    }
@@ -740,13 +739,14 @@ let minimumSpanningTree = (starList: list(Model.star)) => {
 };
 
 let random = () => {
-  Random.self_init();
   let width = 50. +. Random.float(50.);
   let height = 50. +. Random.float(50.);
   let randomPosition = () =>
     Model.{x: Random.float(width), y: Random.float(height)};
   let stars =
-    Lists.init(12, id => Model.{id, position: randomPosition(), size: 1.});
+    Lists.init(5, id =>
+      Model.{id, position: randomPosition(), size: Random.float(0.5) +. 0.5}
+    );
   let edges = minimumSpanningTree(stars);
   let constellations: list(Model.constellation) = [
     {name: "Random", edges, found: false},

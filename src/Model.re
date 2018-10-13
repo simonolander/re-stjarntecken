@@ -23,11 +23,24 @@ let getStarPosition = star => star.position;
 
 type constellationEdge = (starId, starId);
 
+let getConstellationEdgeStarIds = edge => [fst(edge), snd(edge)];
+
 type constellation = {
   edges: list(constellationEdge),
   name: string,
   found: bool,
 };
+
+let constellationIsFound = constellation => constellation.found;
+
+let getConstellationEdges = constellation => constellation.edges;
+
+let getConstellationStarIds = constellation =>
+  constellation.edges
+  |> Lists.flatMap(getConstellationEdgeStarIds)
+  |> Lists.distinct;
+
+let constellationContainsEdge = (edge, constellation) => Lists.contains(edge, constellation.edges);
 
 type sky = {
   stars: list(star),
@@ -35,6 +48,12 @@ type sky = {
 };
 
 let starHasId = (id, star) => star.id == id;
+
+let constellationEdgeContainsStarId = (starId, constellationEdge) =>
+  starId == fst(constellationEdge) || starId == snd(constellationEdge);
+
+let constellationEdgesContainStarId = starId =>
+  List.exists(constellationEdgeContainsStarId(starId));
 
 let createEdge: (starId, starId) => option(constellationEdge) =
   (id1, id2) =>
