@@ -141,7 +141,8 @@ let make = (~sky: Model.sky, _children) => {
     switch (action) {
     | EnterStar(enteredStarId) =>
       switch (state.focusedStarId) {
-      | None => ReasonReact.Update({...state, enteredStarId: Some(enteredStarId)})
+      | None =>
+        ReasonReact.Update({...state, enteredStarId: Some(enteredStarId)})
       | Some(oldFocusedStarId) =>
         let newFocusedStarId = enteredStarId;
         let edge = Model.createEdge(newFocusedStarId, oldFocusedStarId);

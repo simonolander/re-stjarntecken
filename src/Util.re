@@ -738,13 +738,13 @@ let minimumSpanningTree = (starList: list(Model.star)) => {
   };
 };
 
-let random = () => {
+let random = (numberOfStars: int) => {
   let width = 50. +. Random.float(50.);
   let height = 50. +. Random.float(50.);
   let randomPosition = () =>
     Model.{x: Random.float(width), y: Random.float(height)};
   let stars =
-    Lists.init(5, id =>
+    Lists.init(numberOfStars, id =>
       Model.{id, position: randomPosition(), size: Random.float(0.5) +. 0.5}
     );
   let edges = minimumSpanningTree(stars);
