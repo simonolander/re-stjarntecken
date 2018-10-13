@@ -3,10 +3,17 @@ type position = {
   y: float,
 };
 
-let distance = (p1, p2) => {
+let distance = (p1: position, p2: position) => {
   let dx = p2.x -. p1.x;
   let dy = p2.y -. p1.y;
   sqrt(dx *. dx +. dy *. dy);
+};
+
+type rectangle = {
+  x: float,
+  y: float,
+  width: float,
+  height: float,
 };
 
 type starId = int;
@@ -40,7 +47,8 @@ let getConstellationStarIds = constellation =>
   |> Lists.flatMap(getConstellationEdgeStarIds)
   |> Lists.distinct;
 
-let constellationContainsEdge = (edge, constellation) => Lists.contains(edge, constellation.edges);
+let constellationContainsEdge = (edge, constellation) =>
+  Lists.contains(edge, constellation.edges);
 
 type sky = {
   stars: list(star),

@@ -1,25 +1,17 @@
-type state = {
-  count: int,
-  show: bool,
-};
+let component = ReasonReact.statelessComponent("Sidebar");
 
-type action =
-  | Click
-  | Toggle;
-
-let component = ReasonReact.reducerComponent("Sidebar");
-
-let make = _children => {
+let make =
+    (
+      ~constellations: list(Model.constellation),
+      ~stars: list(Model.star),
+      _children,
+    ) => {
   ...component,
-  initialState: () => {count: 0, show: true},
-  reducer: (action, state) =>
-    switch (action) {
-    | Click => ReasonReact.Update({...state, count: state.count + 1})
-    | Toggle => ReasonReact.Update({...state, show: !state.show})
-    },
-  render: self => {
-    let _message =
-      "You've clicked this " ++ string_of_int(self.state.count) ++ " times(s)";
-    <div className="column is-one-fifth"> <td disabled=true /> </div>;
+  render: _self => {
+    let constellationCards =
+      constellations
+      |> List.map(constellation => <ConstellationCard constellation stars />)
+      |> Array.of_list;
+    <div className="column is-one-fifth"> ...constellationCards </div>;
   },
 };
