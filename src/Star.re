@@ -7,7 +7,7 @@ let hoverFillUnfocused = "transparent";
 let make =
     (
       ~position: Model.position,
-      ~radius: float,
+      ~radius: float=1.,
       ~focused: bool=false,
       ~active: bool=false,
       ~entered: bool=false,

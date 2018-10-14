@@ -2,7 +2,7 @@ let theLover = () => {
   let stars: list(Model.star) = [
     {
       id: 1,
-      size: 1.,
+      size: 4.,
       position: {
         x: 245.,
         y: 159.,
@@ -10,7 +10,7 @@ let theLover = () => {
     },
     {
       id: 2,
-      size: 1.,
+      size: 4.,
       position: {
         x: 212.,
         y: 187.,
@@ -18,7 +18,7 @@ let theLover = () => {
     },
     {
       id: 3,
-      size: 1.,
+      size: 4.,
       position: {
         x: 183.,
         y: 165.,
@@ -26,7 +26,7 @@ let theLover = () => {
     },
     {
       id: 4,
-      size: 1.,
+      size: 4.,
       position: {
         x: 195.,
         y: 103.,
@@ -34,7 +34,7 @@ let theLover = () => {
     },
     {
       id: 5,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 226.,
         y: 82.,
@@ -42,7 +42,7 @@ let theLover = () => {
     },
     {
       id: 6,
-      size: 1.,
+      size: 4.,
       position: {
         x: 301.,
         y: 86.,
@@ -50,7 +50,7 @@ let theLover = () => {
     },
     {
       id: 7,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 323.,
         y: 139.,
@@ -58,7 +58,7 @@ let theLover = () => {
     },
     {
       id: 8,
-      size: 1.,
+      size: 4.,
       position: {
         x: 299.,
         y: 167.,
@@ -66,7 +66,7 @@ let theLover = () => {
     },
     {
       id: 9,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 312.,
         y: 218.,
@@ -74,7 +74,7 @@ let theLover = () => {
     },
     {
       id: 10,
-      size: 1.,
+      size: 4.,
       position: {
         x: 280.,
         y: 214.,
@@ -82,7 +82,7 @@ let theLover = () => {
     },
     {
       id: 11,
-      size: 1.,
+      size: 4.,
       position: {
         x: 275.,
         y: 334.,
@@ -90,7 +90,7 @@ let theLover = () => {
     },
     {
       id: 12,
-      size: 1.,
+      size: 4.,
       position: {
         x: 212.,
         y: 287.,
@@ -124,7 +124,7 @@ let karlavagnen = () => {
   let stars: list(Model.star) = [
     {
       id: 1,
-      size: 1.,
+      size: 4.,
       position: {
         x: 16.,
         y: 25.,
@@ -132,7 +132,7 @@ let karlavagnen = () => {
     },
     {
       id: 2,
-      size: 1.,
+      size: 4.,
       position: {
         x: 31.,
         y: 23.,
@@ -140,7 +140,7 @@ let karlavagnen = () => {
     },
     {
       id: 3,
-      size: 1.,
+      size: 4.,
       position: {
         x: 45.,
         y: 31.,
@@ -148,7 +148,7 @@ let karlavagnen = () => {
     },
     {
       id: 4,
-      size: 1.,
+      size: 4.,
       position: {
         x: 48.,
         y: 50.,
@@ -156,7 +156,7 @@ let karlavagnen = () => {
     },
     {
       id: 5,
-      size: 1.,
+      size: 4.,
       position: {
         x: 70.,
         y: 52.,
@@ -164,7 +164,7 @@ let karlavagnen = () => {
     },
     {
       id: 6,
-      size: 1.,
+      size: 4.,
       position: {
         x: 76.,
         y: 33.,
@@ -186,7 +186,7 @@ let theApprentice = () => {
   let stars: list(Model.star) = [
     {
       id: 1,
-      size: 1.,
+      size: 4.,
       position: {
         x: 191.,
         y: 49.,
@@ -194,7 +194,7 @@ let theApprentice = () => {
     },
     {
       id: 2,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 208.,
         y: 175.,
@@ -202,7 +202,7 @@ let theApprentice = () => {
     },
     {
       id: 3,
-      size: 1.,
+      size: 4.,
       position: {
         x: 214.,
         y: 225.,
@@ -210,7 +210,7 @@ let theApprentice = () => {
     },
     {
       id: 4,
-      size: 1.,
+      size: 4.,
       position: {
         x: 247.,
         y: 333.,
@@ -218,7 +218,7 @@ let theApprentice = () => {
     },
     {
       id: 5,
-      size: 1.,
+      size: 4.,
       position: {
         x: 137.,
         y: 205.,
@@ -226,7 +226,7 @@ let theApprentice = () => {
     },
     {
       id: 6,
-      size: 1.,
+      size: 4.,
       position: {
         x: 157.,
         y: 251.,
@@ -234,7 +234,7 @@ let theApprentice = () => {
     },
     {
       id: 7,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 265.,
         y: 219.,
@@ -242,7 +242,7 @@ let theApprentice = () => {
     },
     {
       id: 8,
-      size: 1.,
+      size: 4.,
       position: {
         x: 343.,
         y: 201.,
@@ -250,7 +250,7 @@ let theApprentice = () => {
     },
     {
       id: 9,
-      size: 1.,
+      size: 4.,
       position: {
         x: 305.,
         y: 130.,
@@ -258,7 +258,7 @@ let theApprentice = () => {
     },
     {
       id: 10,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 260.,
         y: 175.,
@@ -266,7 +266,7 @@ let theApprentice = () => {
     },
     {
       id: 11,
-      size: 1.,
+      size: 4.,
       position: {
         x: 330.,
         y: 69.,
@@ -301,7 +301,7 @@ let theAtronach = () => {
   let stars: list(Model.star) = [
     {
       id: 1,
-      size: 1.,
+      size: 4.,
       position: {
         x: 222.,
         y: 295.,
@@ -309,7 +309,7 @@ let theAtronach = () => {
     },
     {
       id: 2,
-      size: 1.,
+      size: 4.,
       position: {
         x: 213.,
         y: 229.,
@@ -317,7 +317,7 @@ let theAtronach = () => {
     },
     {
       id: 3,
-      size: 1.,
+      size: 4.,
       position: {
         x: 186.,
         y: 196.,
@@ -325,7 +325,7 @@ let theAtronach = () => {
     },
     {
       id: 4,
-      size: 1.,
+      size: 4.,
       position: {
         x: 185.,
         y: 120.,
@@ -333,7 +333,7 @@ let theAtronach = () => {
     },
     {
       id: 5,
-      size: 1.,
+      size: 4.,
       position: {
         x: 208.,
         y: 79.,
@@ -341,7 +341,7 @@ let theAtronach = () => {
     },
     {
       id: 6,
-      size: 1.,
+      size: 4.,
       position: {
         x: 279.,
         y: 85.,
@@ -349,7 +349,7 @@ let theAtronach = () => {
     },
     {
       id: 7,
-      size: 1.,
+      size: 4.,
       position: {
         x: 264.,
         y: 161.,
@@ -357,7 +357,7 @@ let theAtronach = () => {
     },
     {
       id: 8,
-      size: 1.,
+      size: 4.,
       position: {
         x: 283.,
         y: 294.,
@@ -365,7 +365,7 @@ let theAtronach = () => {
     },
     {
       id: 9,
-      size: 1.,
+      size: 4.,
       position: {
         x: 336.,
         y: 137.,
@@ -373,7 +373,7 @@ let theAtronach = () => {
     },
     {
       id: 10,
-      size: 1.,
+      size: 4.,
       position: {
         x: 304.,
         y: 236.,
@@ -406,7 +406,7 @@ let theLord = () => {
   let stars: list(Model.star) = [
     {
       id: 1,
-      size: 1.,
+      size: 4.,
       position: {
         x: 299.,
         y: 79.,
@@ -414,7 +414,7 @@ let theLord = () => {
     },
     {
       id: 2,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 320.,
         y: 80.,
@@ -422,7 +422,7 @@ let theLord = () => {
     },
     {
       id: 3,
-      size: 1.,
+      size: 4.,
       position: {
         x: 321.,
         y: 116.,
@@ -430,7 +430,7 @@ let theLord = () => {
     },
     {
       id: 4,
-      size: 1.,
+      size: 4.,
       position: {
         x: 317.,
         y: 165.,
@@ -438,7 +438,7 @@ let theLord = () => {
     },
     {
       id: 5,
-      size: 1.,
+      size: 4.,
       position: {
         x: 250.,
         y: 228.,
@@ -446,7 +446,7 @@ let theLord = () => {
     },
     {
       id: 6,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 309.,
         y: 232.,
@@ -454,7 +454,7 @@ let theLord = () => {
     },
     {
       id: 7,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 304.,
         y: 284.,
@@ -462,7 +462,7 @@ let theLord = () => {
     },
     {
       id: 8,
-      size: 1.,
+      size: 4.,
       position: {
         x: 292.,
         y: 317.,
@@ -470,7 +470,7 @@ let theLord = () => {
     },
     {
       id: 9,
-      size: 1.,
+      size: 4.,
       position: {
         x: 260.,
         y: 331.,
@@ -478,7 +478,7 @@ let theLord = () => {
     },
     {
       id: 10,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 244.,
         y: 318.,
@@ -486,7 +486,7 @@ let theLord = () => {
     },
     {
       id: 11,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 255.,
         y: 298.,
@@ -494,7 +494,7 @@ let theLord = () => {
     },
     {
       id: 12,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 291.,
         y: 126.,
@@ -502,7 +502,7 @@ let theLord = () => {
     },
     {
       id: 13,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 272.,
         y: 126.,
@@ -510,7 +510,7 @@ let theLord = () => {
     },
     {
       id: 14,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 250.,
         y: 129.,
@@ -518,7 +518,7 @@ let theLord = () => {
     },
     {
       id: 15,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 375.,
         y: 149.,
@@ -526,7 +526,7 @@ let theLord = () => {
     },
     {
       id: 16,
-      size: 1.,
+      size: 4.,
       position: {
         x: 332.,
         y: 236.,
@@ -534,7 +534,7 @@ let theLord = () => {
     },
     {
       id: 17,
-      size: 1.,
+      size: 4.,
       position: {
         x: 328.,
         y: 327.,
@@ -542,7 +542,7 @@ let theLord = () => {
     },
     {
       id: 18,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 356.,
         y: 318.,
@@ -550,7 +550,7 @@ let theLord = () => {
     },
     {
       id: 19,
-      size: 0.7,
+      size: 3.,
       position: {
         x: 359.,
         y: 281.,
@@ -591,7 +591,7 @@ let template = () => {
   let stars: list(Model.star) = [
     {
       id: 1,
-      size: 1.,
+      size: 4.,
       position: {
         x: 0.,
         y: 0.,
@@ -738,16 +738,98 @@ let minimumSpanningTree = (starList: list(Model.star)) => {
   };
 };
 
+let addSomeRandomEdges =
+    (stars: list(Model.star), edges: list(Model.constellationEdge)) => {
+  let starArray = Array.of_list(stars);
+  let rec f = (remainingTries, remainingEdges, edges) =>
+    if (remainingTries == 0 || remainingEdges == 0) {
+      edges;
+    } else {
+      switch (Arrays.pickDifferent2(starArray)) {
+      | None => edges
+      | Some((star1, star2)) =>
+        switch (Model.createEdge(star1.id, star2.id)) {
+        | None => f(remainingTries - 1, remainingEdges, edges)
+        | Some(edge) =>
+          if (Belt.Set.has(edges, edge)) {
+            f(remainingTries - 1, remainingEdges, edges);
+          } else {
+            let edgeIntersects = (edge: Model.constellationEdge) =>
+              switch (Model.findStars(stars, edge)) {
+              | None => false
+              | Some((star3, star4)) =>
+                Geometry.lineSegmentsIntersect(
+                  star1.position,
+                  star2.position,
+                  star3.position,
+                  star4.position,
+                )
+              };
+            let starIsTooClose = (star: Model.star) =>
+              star != star1
+              && star != star2
+              && Geometry.pointLineSegmentDistance(
+                   star.position,
+                   star1.position,
+                   star2.position,
+                 )
+              < star.size
+              *. 2.;
+            if (List.exists(starIsTooClose, stars)
+                || Belt.Set.some(edges, edgeIntersects)) {
+              f(remainingTries - 1, remainingEdges, edges);
+            } else {
+              f(
+                remainingTries - 1,
+                remainingEdges - 1,
+                Belt.Set.add(edges, edge),
+              );
+            };
+          }
+        }
+      };
+    };
+  f(
+    List.length(stars) * List.length(stars),
+    List.length(stars) / 6,
+    Belt.Set.fromArray(
+      Array.of_list(edges),
+      ~id=(module Model.ConstellationEdgeComparable),
+    ),
+  )
+  |> Belt.Set.toList;
+};
+
 let random = (numberOfStars: int) => {
   let width = 50. +. Random.float(50.);
   let height = 50. +. Random.float(50.);
   let randomPosition = () =>
     Model.{x: Random.float(width), y: Random.float(height)};
+  let removeIfTooClose = list => {
+    let rec f = (remaining: list(Model.star), kept) =>
+      switch (remaining) {
+      | [] => kept
+      | [head, ...tail] =>
+        let tooClose =
+          List.exists(
+            (k: Model.star) =>
+              Model.distance(head.position, k.position) < head.size +. k.size,
+            kept,
+          );
+        if (tooClose) {
+          f(tail, kept);
+        } else {
+          f(tail, [head, ...kept]);
+        };
+      };
+    f(list, []);
+  };
   let stars =
     Lists.init(numberOfStars, id =>
-      Model.{id, position: randomPosition(), size: Random.float(0.5) +. 0.5}
-    );
-  let edges = minimumSpanningTree(stars);
+      Model.{id, position: randomPosition(), size: Random.float(1.) +. 2.}
+    )
+    |> removeIfTooClose;
+  let edges = minimumSpanningTree(stars) |> addSomeRandomEdges(stars);
   let constellations: list(Model.constellation) = [
     {name: "Random", edges, found: false},
   ];

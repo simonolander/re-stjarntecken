@@ -30,6 +30,19 @@ let getStarPosition = star => star.position;
 
 type constellationEdge = (starId, starId);
 
+module ConstellationEdgeComparable =
+  Belt.Id.MakeComparable({
+    type t = constellationEdge;
+    let cmp = ((id1, id2), (id3, id4)) =>
+      if (id1 == id3) {
+        Pervasives.compare(id2, id4);
+      } else {
+        Pervasives.compare(id1, id3);
+      };
+  });
+
+let constellationEdgeSet = Belt.Set.make(~id=(module ConstellationEdgeComparable));
+
 let getConstellationEdgeStarIds = edge => [fst(edge), snd(edge)];
 
 type constellation = {

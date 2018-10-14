@@ -119,7 +119,7 @@ let make = (~sky: Model.sky, _children) => {
              |> List.map(Belt.Map.Int.get(idStarMap))
              |> Option.flattenList
              |> List.map((star: Model.star) =>
-                  <Star position={star.position} radius={star.size *. 3.} />
+                  <Star position={star.position} radius={star.size *. 0.7} />
                 )
              |> Array.of_list;
            let edges =
@@ -152,8 +152,8 @@ let make = (~sky: Model.sky, _children) => {
              position={star.position}
              radius={
                Option.filter((==)(star.id), self.state.focusedStarId)
-               |> Option.map(Functions.always(5.))
-               |> Option.withDefault(4.)
+               |> Option.map(Functions.always(1.2))
+               |> Option.withDefault(1.)
                |> ( *. )(star.size)
              }
              active=true
@@ -168,9 +168,7 @@ let make = (~sky: Model.sky, _children) => {
       self.state.currentEdges
       |> List.map(Model.findStars(self.state.stars))
       |> List.map(
-           Option.map(((star1, star2)) =>
-             <ConstellationEdge star1 star2 />
-           ),
+           Option.map(((star1, star2)) => <ConstellationEdge star1 star2 />),
          )
       |> Option.flattenList
       |> Array.of_list;
