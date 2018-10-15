@@ -165,6 +165,39 @@ let pointLineSegmentDistance =
     (point: Model.position, l1p1: Model.position, l1p2: Model.position) =>
   Model.distance(closestPointOnLineSegment(point, l1p1, l1p2), point);
 
+let zoomViewBox = (viewBox: Model.rectangle, delta, position: Model.position) => {
+  let widthByHeight = viewBox.width /. viewBox.height;
+  let minViewBoxSize = 10.;
+  let maxViewBoxSize = 1000.;
+  let (width, height, actualDelta) =
+    if (viewBox.width < viewBox.height) {
+      if (delta < 1.) {
+        let width = max(minViewBoxSize, viewBox.width *. delta);
+        let height = width /. widthByHeight;
+        let actualDelta = width /. viewBox.width;
+        (width, height, actualDelta);
+      } else {
+        let height = min(maxViewBoxSize, viewBox.height *. delta);
+        let width = height *. widthByHeight;
+        let actualDelta = height /. viewBox.height;
+        (width, height, actualDelta);
+      };
+    } else if (delta < 1.) {
+      let height = max(minViewBoxSize, viewBox.height *. delta);
+      let width = height /. widthByHeight;
+      let actualDelta = height /. viewBox.height;
+      (width, height, actualDelta);
+    } else {
+      let width = min(maxViewBoxSize, viewBox.width *. delta);
+      let height = width *. widthByHeight;
+      let actualDelta = width /. viewBox.width;
+      (width, height, actualDelta);
+    };
+  let x = viewBox.x -. (position.x -. viewBox.x) *. (actualDelta -. 1.);
+  let y = viewBox.y -. (position.y -. viewBox.y) *. (actualDelta -. 1.);
+  Model.{x, y, width, height};
+};
+
 let viewBoxString = (rectangle: Model.rectangle) =>
   Strings.ofFloat(rectangle.x)
   ++ " "

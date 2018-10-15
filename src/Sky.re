@@ -4,19 +4,17 @@ type state = {
   enteredStarId: option(Model.starId),
   focusedStarId: option(Model.starId),
   currentEdges: list(Model.constellationEdge),
+  viewBox: Model.rectangle,
 };
 
 type action =
   | EnterStar(Model.starId)
   | LeaveStar(Model.starId)
   | Down
-  | Up;
+  | Up
+  | Zoom(float, Model.position);
 
 let component = ReasonReact.reducerComponent("Sky");
-
-let viewBox: Model.rectangle = {x: 0., y: 0., width: 100., height: 100.};
-
-let viewBoxString = Geometry.viewBoxString(viewBox);
 
 let style = ReactDOMRe.Style.make(~backgroundColor="black", ());
 
@@ -51,13 +49,21 @@ let starIdBelongsToFoundConstellation = (starId, constellations) =>
 let make = (~sky: Model.sky, _children) => {
   ...component,
   initialState: () => {
+    let viewBox = Model.{x: 0., y: 0., width: 100., height: 100.};
     let stars = Geometry.normalizeStarPositions(viewBox, sky.stars);
     let constellations = sky.constellations;
     let enteredStarId = None;
     let focusedStarId = None;
     /* let currentEdges = List.hd(sky.constellations).edges; */
     let currentEdges = [];
-    {stars, constellations, enteredStarId, focusedStarId, currentEdges};
+    {
+      stars,
+      constellations,
+      enteredStarId,
+      focusedStarId,
+      currentEdges,
+      viewBox,
+    };
   },
   reducer: (action, state) =>
     switch (action) {
@@ -103,6 +109,11 @@ let make = (~sky: Model.sky, _children) => {
     | Down =>
       ReasonReact.Update({...state, focusedStarId: state.enteredStarId})
     | Up => ReasonReact.Update({...state, focusedStarId: None})
+    | Zoom(delta, position) =>
+      ReasonReact.Update({
+        ...state,
+        viewBox: Geometry.zoomViewBox(state.viewBox, delta, position),
+      })
     },
   render: self => {
     let idStarMap =
@@ -174,11 +185,37 @@ let make = (~sky: Model.sky, _children) => {
       |> Array.of_list;
     let elements = Array.concat([foundConstellations, currentEdges, stars]);
     <svg
+      preserveAspectRatio="none"
       className="full-size"
-      viewBox=viewBoxString
+      viewBox={Geometry.viewBoxString(self.state.viewBox)}
       style
       onMouseDown={_ => self.send(Down)}
-      onMouseUp={_ => self.send(Up)}>
+      onMouseUp={_ => self.send(Up)}
+      onWheel={
+        event => {
+          let deltaY = event->ReactEvent.Wheel.deltaY;
+          let delta = 1. +. deltaY *. 0.001;
+          let clientX = event->ReactEvent.Wheel.nativeEvent##clientX;
+          let clientY = event->ReactEvent.Wheel.nativeEvent##clientY;
+          let svg =
+            event->ReactEvent.Wheel.nativeEvent##target##tagName == "svg" ?
+              event->ReactEvent.Wheel.nativeEvent##target :
+              event->ReactEvent.Wheel.nativeEvent##target##viewportElement;
+          let clientWidth = svg##clientWidth;
+          let clientHeight = svg##clientHeight;
+          let x =
+            self.state.viewBox.x
+            +. clientX
+            /. clientWidth
+            *. self.state.viewBox.width;
+          let y =
+            self.state.viewBox.y
+            +. clientY
+            /. clientHeight
+            *. self.state.viewBox.height;
+          self.send(Zoom(delta, {x, y}));
+        }
+      }>
       ...elements
     </svg>;
   },
