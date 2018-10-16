@@ -165,10 +165,36 @@ let pointLineSegmentDistance =
     (point: Model.position, l1p1: Model.position, l1p2: Model.position) =>
   Model.distance(closestPointOnLineSegment(point, l1p1, l1p2), point);
 
-let zoomViewBox = (viewBox: Model.rectangle, delta, position: Model.position) => {
+let clamp = (value, minValue, maxValue) =>
+  min(maxValue, max(minValue, value));
+
+let panViewBox = (viewBox: Model.rectangle, dx, dy, bounds: Model.rectangle) => {
+  let x =
+    if (dx < 0.) {
+      max(viewBox.x +. dx, bounds.x);
+    } else {
+      min(viewBox.x +. dx, bounds.x +. bounds.width -. viewBox.width);
+    };
+  let y =
+    if (dy < 0.) {
+      max(viewBox.y +. dy, bounds.y);
+    } else {
+      min(viewBox.y +. dy, bounds.y +. bounds.height -. viewBox.height);
+    };
+  {...viewBox, x, y};
+};
+
+let zoomViewBox =
+    (
+      viewBox: Model.rectangle,
+      delta,
+      position: Model.position,
+      bounds: Model.rectangle,
+    ) => {
   let widthByHeight = viewBox.width /. viewBox.height;
   let minViewBoxSize = 10.;
-  let maxViewBoxSize = 1000.;
+  let maxViewBoxWidth = bounds.width;
+  let maxViewBoxHeight = bounds.height;
   let (width, height, actualDelta) =
     if (viewBox.width < viewBox.height) {
       if (delta < 1.) {
@@ -177,7 +203,7 @@ let zoomViewBox = (viewBox: Model.rectangle, delta, position: Model.position) =>
         let actualDelta = width /. viewBox.width;
         (width, height, actualDelta);
       } else {
-        let height = min(maxViewBoxSize, viewBox.height *. delta);
+        let height = min(maxViewBoxHeight, viewBox.height *. delta);
         let width = height *. widthByHeight;
         let actualDelta = height /. viewBox.height;
         (width, height, actualDelta);
@@ -188,14 +214,14 @@ let zoomViewBox = (viewBox: Model.rectangle, delta, position: Model.position) =>
       let actualDelta = height /. viewBox.height;
       (width, height, actualDelta);
     } else {
-      let width = min(maxViewBoxSize, viewBox.width *. delta);
+      let width = min(maxViewBoxWidth, viewBox.width *. delta);
       let height = width *. widthByHeight;
       let actualDelta = width /. viewBox.width;
       (width, height, actualDelta);
     };
-  let x = viewBox.x -. (position.x -. viewBox.x) *. (actualDelta -. 1.);
-  let y = viewBox.y -. (position.y -. viewBox.y) *. (actualDelta -. 1.);
-  Model.{x, y, width, height};
+  let dx = (position.x -. viewBox.x) *. (1. -. actualDelta);
+  let dy = (position.y -. viewBox.y) *. (1. -. actualDelta);
+  panViewBox({...viewBox, width, height}, dx, dy, bounds);
 };
 
 let viewBoxString = (rectangle: Model.rectangle) =>

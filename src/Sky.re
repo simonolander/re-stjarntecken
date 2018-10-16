@@ -12,7 +12,8 @@ type action =
   | LeaveStar(Model.starId)
   | Down
   | Up
-  | Zoom(float, Model.position);
+  | Zoom(float, Model.position)
+  | Pan(float, float);
 
 let component = ReasonReact.reducerComponent("Sky");
 
@@ -39,6 +40,8 @@ let updateConstellationsFound =
        }
      );
 };
+
+let bounds = Model.{x: 0., y: 0., width: 100., height: 100.};
 
 let starIdBelongsToFoundConstellation = (starId, constellations) =>
   constellations
@@ -85,13 +88,20 @@ let make = (~sky: Model.sky, _children) => {
           constellations
           |> List.filter(Model.constellationIsFound)
           |> Lists.flatMap(Model.getConstellationEdges);
-        let isEdgeFound = edge => !Lists.contains(edge, foundEdges);
+        let isEdgeNotFound = edge => !Lists.contains(edge, foundEdges);
         let currentEdges =
-          currentEdgesBeforeRemoval |> List.filter(isEdgeFound);
+          currentEdgesBeforeRemoval |> List.filter(isEdgeNotFound);
+        let foundStarIds =
+          constellations
+          |> List.filter(Model.constellationIsFound)
+          |> Lists.flatMap(Model.getConstellationStarIds);
+        let isStarNotFound = starId => !Lists.contains(starId, foundStarIds);
         ReasonReact.Update({
           ...state,
-          enteredStarId: Some(enteredStarId),
-          focusedStarId: Some(newFocusedStarId),
+          enteredStarId:
+            Some(enteredStarId) |> Option.filter(isStarNotFound),
+          focusedStarId:
+            Some(newFocusedStarId) |> Option.filter(isStarNotFound),
           currentEdges,
           constellations,
         });
@@ -112,7 +122,12 @@ let make = (~sky: Model.sky, _children) => {
     | Zoom(delta, position) =>
       ReasonReact.Update({
         ...state,
-        viewBox: Geometry.zoomViewBox(state.viewBox, delta, position),
+        viewBox: Geometry.zoomViewBox(state.viewBox, delta, position, bounds),
+      })
+    | Pan(dx, dy) =>
+      ReasonReact.Update({
+        ...state,
+        viewBox: Geometry.panViewBox(state.viewBox, dx, dy, bounds),
       })
     },
   render: self => {
@@ -214,6 +229,37 @@ let make = (~sky: Model.sky, _children) => {
             /. clientHeight
             *. self.state.viewBox.height;
           self.send(Zoom(delta, {x, y}));
+        }
+      }
+      onMouseMove={
+        event => {
+          let buttons = event->ReactEvent.Mouse.buttons;
+          let primaryButtonPressed = buttons land 0x1 == 1;
+          if (Belt.Option.isNone(self.state.focusedStarId)
+              && primaryButtonPressed) {
+            let optMovementX =
+              event->ReactEvent.Mouse.nativeEvent##movementX
+              ->Js.Nullable.toOption;
+            let optMovementY =
+              event->ReactEvent.Mouse.nativeEvent##movementY
+              ->Js.Nullable.toOption;
+            switch (Option.both(optMovementX, optMovementY)) {
+            | None => ()
+            | Some((movementX, movementY)) =>
+              let svg =
+                event->ReactEvent.Mouse.nativeEvent##target##tagName == "svg" ?
+                  event->ReactEvent.Mouse.nativeEvent##target :
+                  event->ReactEvent.Mouse.nativeEvent##target##viewportElement;
+              let clientWidth = svg##clientWidth;
+              let clientHeight = svg##clientHeight;
+              let dx = -. movementX /. clientWidth *. self.state.viewBox.width;
+              let dy =
+                -. movementY /. clientHeight *. self.state.viewBox.height;
+              self.send(Pan(dx, dy));
+            };
+          } else {
+            ();
+          };
         }
       }>
       ...elements
